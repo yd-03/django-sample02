@@ -1,5 +1,8 @@
-{% extends "base.html" %} {% block title %}ブロックタグで表示{% endblock %} {%
-block content %}
+<!-- prettier-ignore -->
+{% extends "base.html" %}
+{% block title %}ブロックタグで表示{% endblock %}
+
+{% block content %}
 <h1>今日のラッキーナンバーはこちら→ {{random_number}}</h1>
 <p>あなたの入力した数字は→ {{ number}}</p>
 <p>{{random_number}} + {{number}} = {{ random_number|add:number}}</p>
