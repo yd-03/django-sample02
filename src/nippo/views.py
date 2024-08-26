@@ -14,3 +14,11 @@ def nippoDetailView(request, number):
         "number": number,
     }
     return render(request, template_name, ctx)
+
+
+def nippoCreateView(request):
+    template_name = "nippo/nippo-form.html"
+    if request.POST:
+        title = request.POST["title"]
+        content = request.POST["content"]
+    return render(request, template_name)

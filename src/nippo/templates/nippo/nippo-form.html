@@ -1,0 +1,11 @@
+<!-- prettier-ignore -->
+{% extends "base.html" %}
+{% block title %} 日報の作成 {% endblock %}
+
+{% block content %}
+<form method="GET">
+  <input type="text" name="title" />
+  <input type="text" name="content" />
+  <button type="submit">送信</button>
+</form>
+{% endblock %}
