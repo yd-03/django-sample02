@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import NippoModel
 from .forms import NippoFormClass
 
@@ -20,7 +20,8 @@ def nippoDetailView(request, pk):
     template_name = "nippo/nippo-detail.html"
     ctx = {}
     # モデルの特定のオブジェクトをDBから取得
-    q = NippoModel.objects.get(pk=pk)
+    # q = NippoModel.objects.get(pk=pk)
+    q = get_object_or_404(NippoModel, pk=pk)
     ctx["object"] = q
     return render(request, template_name, ctx)
 
@@ -43,7 +44,8 @@ def nippoCreateView(request):
 def nippoUpdateFormView(request, pk):
     """既存の日報を編集するビュー関数"""
     template_name = "nippo/nippo-form.html"
-    obj = NippoModel.objects.get(pk=pk)
+    # obj = NippoModel.objects.get(pk=pk)
+    obj = get_object_or_404(NippoModel, pk=pk)
     # フォームクラスを使用してフォームを作成（初期値として、既存のオブジェクトの値をフォームにセット）
     initial_values = {"title": obj.title, "content": obj.content}
     # POSTリクエスト時はリクエストデータをフォームにセット、なければ初期値をセット
