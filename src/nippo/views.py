@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import NippoModel
 from .forms import NippoFormClass
 
@@ -21,6 +21,7 @@ def nippoDetailView(request, pk):
     ctx = {}
     # モデルの特定のオブジェクトをDBから取得
     # q = NippoModel.objects.get(pk=pk)
+    # get_object_or_404を使うと、オブジェクトが存在しない場合は404エラーを返す
     q = get_object_or_404(NippoModel, pk=pk)
     ctx["object"] = q
     return render(request, template_name, ctx)
@@ -38,6 +39,7 @@ def nippoCreateView(request):
         content = form.cleaned_data["content"]
         obj = NippoModel(title=title, content=content)
         obj.save()
+        return redirect("nippo-list")
     return render(request, template_name, ctx)
 
 
@@ -58,6 +60,9 @@ def nippoUpdateFormView(request, pk):
         obj.title = title
         obj.content = content
         obj.save()
+        # 送信後はリダイレクト
+        if request.method == "POST":
+            return redirect("nippo-list")
     return render(request, template_name, ctx)
 
 
@@ -69,4 +74,6 @@ def nippoDeleteView(request, pk):
     if request.method == "POST":
         obj.delete()
     ctx = {"object": obj}
+    if request.method == "POST":
+        return redirect("nippo-list")
     return render(request, template_name, ctx)
