@@ -59,3 +59,14 @@ def nippoUpdateFormView(request, pk):
         obj.content = content
         obj.save()
     return render(request, template_name, ctx)
+
+
+def nippoDeleteView(request, pk):
+    """既存の日報を削除するビュー関数"""
+    template_name = "nippo/nippo-delete.html"
+    # obj = NippoModel.objects.get(pk=pk)
+    obj = get_object_or_404(NippoModel, pk=pk)
+    if request.method == "POST":
+        obj.delete()
+    ctx = {"object": obj}
+    return render(request, template_name, ctx)
