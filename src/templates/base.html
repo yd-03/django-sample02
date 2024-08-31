@@ -14,6 +14,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -56,7 +58,29 @@
       </div>
     </nav>
     {% block content %}{% endblock %}
-
+    <footer class="bg-primary">
+      <div id="footer-logo">
+        <a href="#">
+          <i
+            class="bi bi-bootstrap-fill footer-logo"
+            style="font-size: 3rem"
+          ></i>
+        </a>
+      </div>
+      <div class="footer-content">
+        <div>
+          <a href="#"> プライバシーポリシー </a>
+        </div>
+        <div>|</div>
+        <div>
+          <a href="#"> 利用規約 </a>
+        </div>
+        <div>|</div>
+        <div>
+          <small>Copyright &copy; 2021 yulikepython</small>
+        </div>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
