@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView
 from .models import NippoModel
 from .forms import NippoFormClass
 
@@ -15,6 +16,21 @@ def nippoListView(request):
     return render(request, template_name, ctx)
 
 
+class NippoListView(ListView):
+    """日報の一覧を表示するビュークラス"""
+
+    template_name = "nippo/nippo-list.html"
+    model = NippoModel
+
+    def get_queryset(self):
+        qs = NippoModel.objects.all()
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        return ctx
+
+
 def nippoDetailView(request, pk):
     """特定の日報の詳細を表示するビュー関数"""
     template_name = "nippo/nippo-detail.html"
@@ -25,6 +41,16 @@ def nippoDetailView(request, pk):
     q = get_object_or_404(NippoModel, pk=pk)
     ctx["object"] = q
     return render(request, template_name, ctx)
+
+
+class NippoDetailView(DetailView):
+    """特定の日報の詳細を表示するビュークラス"""
+
+    template_name = "nippo/nippo-detail.html"
+    model = NippoModel
+
+    def get_object(self):
+        return super().get_object()
 
 
 def nippoCreateView(request):
